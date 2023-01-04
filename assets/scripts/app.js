@@ -8,6 +8,9 @@ adjustHealthBars(chosenMaxLife)
 const attackHandler = () => {
     const damage = dealMonsterDamage(ATTACK_VALUE)
     currentMonsterHealth -= damage
+    if (currentMonsterHealth <= 0) {
+        alert("you won")
+    }
 }
 
 attackBtn.addEventListener('click', attackHandler)
