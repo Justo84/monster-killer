@@ -42,7 +42,12 @@ const strongAttackHandler = () => {
 }
 
 const healPlayerHandler = () => {
+    let healValue
+    if (currentPlayerHealth >= chosenMaxLife - HEAL_VALUE) {
+        alert("You can't heal yet")
+    }
     increasePlayerHealth(HEAL_VALUE)
+    currentPlayerHealth += HEAL_VALUE
     endRound()
 }
 
