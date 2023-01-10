@@ -39,6 +39,10 @@ function removeBonusLife() {
   bonusLifeEl.parentNode.removeChild(bonusLifeEl);
 }
 
+function addBonusLife() {
+  bonusLifeEl.parentNode.appendChild(bonusLifeEl);
+}
+
 function setPlayerHealth(health) {
   playerHealthBar.value = health;
 }
