@@ -10,7 +10,7 @@ const LOG_MONSTER_ATTACK = 'MONSTER_ATTACK'
 const LOG_PLAYER_HEAL = 'PLAYER_HEAL'
 const LOG_GAME_OVER = "GAME_OVER"
 
-// const enteredHealth = prompt("Maximum life:", "100")
+const enteredHealth = prompt("Maximum life:", "100")
 
 let chosenMaxLife = parseInt(enteredHealth);
 
@@ -66,10 +66,13 @@ function endRound() {
 
     if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
         alert("you won")
+        writeToLog(LOG_GAME_OVER, 'PLAYER_WON', currentMonsterHealth, currentPlayerHealth)
     } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
         alert("you lost")
+        writeToLog(LOG_GAME_OVER, "MONSTER_WON", currentMonsterHealth, currentPlayerHealth)
     } else if (currentMonsterHealth <= 0 && currentPlayerHealth <= 0) {
         alert("Draw!")
+        writeToLog(LOG_GAME_OVER, 'A DRAW', currentMonsterHealth, currentPlayerHealth)
     }
 
     if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
@@ -79,13 +82,17 @@ function endRound() {
 
 const attackMonster = (attackMode) => {
     let maxDamage;
+    let logEvent
     if (attackMode === MODE_ATTACK) {
         maxDamage = ATTACK_VALUE
+        logEvent = LOG_PLAYER_ATTACK
     } else if (MODE_STRONG_ATTACK) {
         maxDamage = STRONG_ATTACK_VALUE
+        logEvent = LOG_PLAYER_STRONG_ATTACK
     }
     const damage = dealMonsterDamage(maxDamage)
     currentMonsterHealth -= damage
+    writeToLog(logEvent, damage, currentMonsterHealth, currentPlayerHealth)
     endRound()
 }
 
@@ -106,6 +113,8 @@ const healPlayerHandler = () => {
     }
     increasePlayerHealth(healValue)
     currentPlayerHealth += healValue
+    writeToLog(LOG_PLAYER_HEAL, healValue, currentMonsterHealth, currentPlayerHealth)
+
     endRound()
 }
 
