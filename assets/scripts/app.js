@@ -22,6 +22,7 @@ let currentPlayerHealth = chosenMaxLife
 let hasBonusLife = true
 
 let battleLog = []
+let lastLoggedEvent
 
 function writeToLog(event, value, monsterHealth, playerHealth) {
     let logEntry = {
@@ -134,10 +135,14 @@ function printLogHandler() {
 
     let i = 0
     for (const logEntry of battleLog) {
-        console.log(`#${i}`)
-        for (const key in logEntry) {
-            console.log(`${key}: ${logEntry[key]}`)
-            console.log(logEntry[key]) // logs the value of the above key
+        if (!lastLoggedEvent && lastLoggedEvent !== 0 || lastLoggedEvent < i) {
+            console.log(`#${i}`)
+            for (const key in logEntry) {
+                console.log(`${key}: ${logEntry[key]}`)
+                console.log(logEntry[key]) // logs the value of the above key
+            }  
+            lastLoggedEvent = i
+            break;
         }
         i++
     }

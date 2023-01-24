@@ -1,0 +1,10 @@
+const body = document.body
+body.append("hello world", "bye")
+
+const div = document.createElement("div") 
+div.innerText = "hello world"
+div.textContent = "hello world 2"
+
+body.append(div)
+
+const div = document.querySelector("div")
