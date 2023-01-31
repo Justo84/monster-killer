@@ -22,8 +22,11 @@ function getMaxLifeValues() {
 let chosenMaxLife
 try {
     chosenMaxLife = getMaxLifeValues();
+    feedbackMessages.innerText = `Player health is ${chosenMaxLife} hit points`
 } catch(err) {
-    return err
+    console.log(err)
+    chosenMaxLife = 100
+    feedbackMessages.innerText = "Player health is 100 hit points"
 }
 let currentMonsterHealth = chosenMaxLife
 let currentPlayerHealth = chosenMaxLife
